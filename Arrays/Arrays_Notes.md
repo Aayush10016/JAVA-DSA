@@ -17,29 +17,36 @@ This file contains all major array problem-solving patterns used in interviews, 
 ## ✅ Two-Pointer Template (Java)
 
 ```java
-public class TwoPointerTemplate {
+public class TwoPointer {
 
-    public static void findPair(int[] arr, int target) {
-        int left = 0, right = arr.length - 1;
+    public static void twoPointerExample(int[] arr, int target) {
+        int start = 0;
+        int end = arr.length - 1;
 
-        while (left < right) {
-            int sum = arr[left] + arr[right];
+        while (start < end) {
+            int sum = arr[start] + arr[end];
 
             if (sum == target) {
-                System.out.println("Pair: " + arr[left] + ", " + arr[right]);
+                System.out.println("Pair found: " + arr[start] + ", " + arr[end]);
                 return;
-            } 
-            else if (sum < target) left++;
-            else right--;
+            }
+
+            if (sum < target) {
+                start++;
+            } else {
+                end--;
+            }
         }
-        System.out.println("No pair found.");
+
+        System.out.println("No pair found");
     }
 
     public static void main(String[] args) {
-        int[] arr = {1, 2, 4, 6, 10};
-        findPair(arr, 8);
+        int[] arr = {2, 3, 5, 7, 9};
+        twoPointerExample(arr, 10);
     }
 }
+
 ```
 🌟 Pattern 2: Sliding Window
 ✔ When to Use
@@ -55,44 +62,50 @@ Subarray problems
 ```java
 public class SlidingWindowFixed {
 
-    public static int maxSumWindow(int[] arr, int k) {
-        int windowSum = 0, maxSum = 0;
+    public static int maxSum(int[] arr, int k) {
+        int sum = 0;
+        int max = 0;
 
-        for (int i = 0; i < k; i++)
-            windowSum += arr[i];
+        // first window
+        for (int i = 0; i < k; i++) {
+            sum += arr[i];
+        }
+        max = sum;
 
-        maxSum = windowSum;
-
+        // sliding window
         for (int i = k; i < arr.length; i++) {
-            windowSum += arr[i] - arr[i - k];
-            maxSum = Math.max(maxSum, windowSum);
+            sum += arr[i] - arr[i - k];
+            max = Math.max(max, sum);
         }
 
-        return maxSum;
+        return max;
     }
 
     public static void main(String[] args) {
         int[] arr = {2, 1, 5, 1, 3, 2};
-        System.out.println(maxSumWindow(arr, 3));
+        System.out.println(maxSum(arr, 3));
     }
 }
+
 ```
 ✅ Variable Size Sliding Window Template (Java)
 ```java
 public class SlidingWindowVariable {
 
     public static int longestSubArray(int[] arr, int k) {
-        int left = 0, sum = 0, maxLen = 0;
+        int start = 0;
+        int sum = 0;
+        int maxLen = 0;
 
-        for (int right = 0; right < arr.length; right++) {
-            sum += arr[right];
+        for (int end = 0; end < arr.length; end++) {
+            sum += arr[end];
 
             while (sum > k) {
-                sum -= arr[left];
-                left++;
+                sum -= arr[start];
+                start++;
             }
 
-            maxLen = Math.max(maxLen, right - left + 1);
+            maxLen = Math.max(maxLen, end - start + 1);
         }
 
         return maxLen;
@@ -103,6 +116,7 @@ public class SlidingWindowVariable {
         System.out.println(longestSubArray(arr, 5));
     }
 }
+
 ```
 🌟 Pattern 3: Prefix Sum + HashMap
 ✔ When to Use
@@ -116,13 +130,14 @@ Counting subarrays
 ```java
 import java.util.*;
 
-public class PrefixSumTemplate {
+public class PrefixSum {
 
-    public static int countSubarraysWithSumK(int[] arr, int k) {
+    public static int subarraySum(int[] arr, int k) {
         Map<Integer, Integer> map = new HashMap<>();
         map.put(0, 1);
 
-        int sum = 0, count = 0;
+        int sum = 0;
+        int count = 0;
 
         for (int num : arr) {
             sum += num;
@@ -139,41 +154,12 @@ public class PrefixSumTemplate {
 
     public static void main(String[] args) {
         int[] arr = {1, 2, 3};
-        System.out.println(countSubarraysWithSumK(arr, 3)); // Output: 2
+        System.out.println(subarraySum(arr, 3));
     }
 }
+
 ```
-🌟 Pattern 4: Kadane’s Algorithm (Max Subarray Sum)
-✔ When to Use
-"Maximum sum subarray"
-
-"Maximum profit"
-
-Contiguous maximum segment
-
-✅ Kadane’s Template (Java)
-```java
-public class KadanesTemplate {
-
-    public static int kadane(int[] arr) {
-        int maxSum = arr[0];
-        int current = 0;
-
-        for (int num : arr) {
-            current = Math.max(num, current + num);
-            maxSum = Math.max(maxSum, current);
-        }
-
-        return maxSum;
-    }
-
-    public static void main(String[] args) {
-        int[] arr = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-        System.out.println(kadane(arr)); // Output: 6
-    }
-}
-```
-🌟 Pattern 5: Cyclic Sort
+🌟 Pattern 4: Cyclic Sort
 ✔ When to Use
 Input contains numbers 1 to N
 
@@ -185,35 +171,40 @@ Duplicate number
 
 ✅ Cyclic Sort Template (Java)
 ```java
-public class CyclicSortTemplate {
+public class CyclicSort {
 
-    public static void cyclicSort(int[] arr) {
+    public static void sort(int[] arr) {
         int i = 0;
-        while (i < arr.length) {
-            int correct = arr[i] - 1;
 
-            if (arr[i] != arr[correct]) {
-                int temp = arr[i];
-                arr[i] = arr[correct];
-                arr[correct] = temp;
+        while (i < arr.length) {
+            int correctIndex = arr[i] - 1;
+
+            if (arr[i] != arr[correctIndex]) {
+                swap(arr, i, correctIndex);
             } else {
                 i++;
             }
         }
     }
 
+    static void swap(int[] arr, int first, int second) {
+        int temp = arr[first];
+        arr[first] = arr[second];
+        arr[second] = temp;
+    }
+
     public static void main(String[] args) {
         int[] arr = {3, 1, 5, 4, 2};
-        cyclicSort(arr);
+        sort(arr);
 
-        for (int n : arr)
-            System.out.print(n + " ");
-
-        // Output: 1 2 3 4 5
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
     }
 }
+
 ```
-🌟 Pattern 6: Binary Search (Sorted Arrays & Binary Search on Answer)
+🌟 Pattern 5: Binary Search (Sorted Arrays & Binary Search on Answer)
 ✔ When to Use
 Array is sorted
 
@@ -223,43 +214,63 @@ Minimize/maximize
 
 “Allocate books”, “Ship packages”, “Aggressive cows”
 
-✅ Binary Search on Answer Template (Java)
+✅General binary search (sorted array)
 ```java
-public class BinarySearchOnAnswer {
+public class BinarySearch {
 
-    public static boolean canShip(int[] arr, int capacity) {
-        int load = 0;
+    public static int search(int[] arr, int target) {
+        int start = 0;
+        int end = arr.length - 1;
 
-        for (int weight : arr) {
-            if (weight > capacity) return false;
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
 
-            if (load + weight > capacity)
-                return false;
+            if (target == arr[mid]) return mid;
 
-            load += weight;
+            if (target < arr[mid]) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
         }
 
-        return true;
-    }
-
-    public static int findMinimumCapacity(int[] arr) {
-        int left = 1, right = 10000;
-
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-
-            if (canShip(arr, mid))
-                right = mid;
-            else
-                left = mid + 1;
-        }
-
-        return left;
+        return -1;
     }
 
     public static void main(String[] args) {
-        int[] arr = {5, 8, 2, 10};
-        System.out.println(findMinimumCapacity(arr));
+        int[] arr = {2, 3, 5, 7, 9};
+        System.out.println(search(arr, 7));
     }
 }
+```
+
+✅ Binary Search on Answer Template (Java)
+```java
+public class BinarySearch {
+
+    public static int search(int[] arr, int target) {
+        int start = 0;
+        int end = arr.length - 1;
+
+        while (start <= end) {
+            int mid = start + (end - start) / 2;
+
+            if (target == arr[mid]) return mid;
+
+            if (target < arr[mid]) {
+                end = mid - 1;
+            } else {
+                start = mid + 1;
+            }
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {2, 3, 5, 7, 9};
+        System.out.println(search(arr, 7));
+    }
+}
+
 ```
