@@ -147,7 +147,7 @@ To reverse a string:
 
 ---
 
-# 🧪 9. Problems You Will Add in This Folder
+# 🧪 9. Problems 
 
 ### ✔ Basics
 - Print numbers 1 to n  
