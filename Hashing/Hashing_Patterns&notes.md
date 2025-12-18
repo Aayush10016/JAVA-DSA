@@ -420,3 +420,16 @@ last.put('a', 5);
 
 ---
 
+# 🎯 FINAL SUMMARY
+
+You now have full hashing notes:
+✔ Hashing fundamentals  
+✔ When to use HashMap vs HashSet  
+✔ Collision basics  
+✔ Pattern recognition  
+✔ Frequency maps  
+✔ Duplicate detection  
+✔ Subarray sum using prefix hashing  
+✔ Unique substring  
+✔ Grouping anagrams  
+✔ Kunal-style base codes
