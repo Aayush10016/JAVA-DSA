@@ -1,4 +1,4 @@
-# 📘 STRINGS — Complete Notes + Definitions + Pattern Recognition + Kunal Kushwaha Base Codes
+# 📘 STRINGS — Complete Notes + Definitions + Pattern Recognition + Base Codes
 
 Strings are one of the most important topics in DSA and interviews.  
 A strong understanding of string manipulation unlocks many problems involving text, patterns, sliding windows, and hashing.
