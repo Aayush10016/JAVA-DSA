@@ -8,7 +8,6 @@ This folder contains fundamental and advanced array problems implemented in Java
 - Sliding window problems  
 - Two-pointer techniques  
 - Prefix & suffix computations  
-- Kadane’s Algorithm  
 - Subarray problems  
 
 ## Purpose
