@@ -8,7 +8,6 @@ These notes explain:
 - ✔ Why it exists  
 - ✔ How to recognize patterns in problems  
 - ✔ How to think  
-- ✔ Kunal-Kushwaha-style base codes  
 
 ---
 
@@ -454,7 +453,7 @@ public class IsSubsequence {
     }
 }
 ```
-🟦 11. Pattern 8: Recursion on Strings (Kunal Style)
+🟦 11. Pattern 8: Recursion on Strings
 ✔ Definition
 Use recursion to:
 
