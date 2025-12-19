@@ -59,25 +59,6 @@ The simplest solution is:
 ### ✔ Space Complexity
 `O(n)` — cloned array  
 
-### 💻 Code (My Submitted Solution)
-```java
-class Solution {
-    public int heightChecker(int[] arr) {
-        int[] expected = arr.clone(); 
-        Arrays.sort(expected);        
-        int count = 0;
-        int i = 0;
-        while (i < arr.length) {
-            if (arr[i] != expected[i]) {
-                count++;
-            }
-            i++;
-        }
-        return count;
-    }
-}
-```
-
 ### ✔ Why This Works
 Sorting gives the correct position for each height.  
 Any mismatch means that student is not in the correct order.
@@ -97,33 +78,6 @@ Heights range from `1 to 100`, very small range → counting sort becomes **O(n)
 - Time: `O(n + range)` → `O(n + 100)`  
 - Space: `O(100)`  
 
-### 💻 Counting Sort Solution
-```java
-class Solution {
-    public int heightChecker(int[] heights) {
-        int[] freq = new int[101];
-
-        // count frequencies
-        for (int h : heights) {
-            freq[h]++;
-        }
-
-        int count = 0;
-        int index = 0;
-
-        // reconstruct expected sorted sequence
-        for (int h = 1; h <= 100; h++) {
-            while (freq[h]-- > 0) {
-                if (heights[index] != h) {
-                    count++;
-                }
-                index++;
-            }
-        }
-        return count;
-    }
-}
-```
 
 ---
 
@@ -135,5 +89,6 @@ class Solution {
 
 ---
 
-
+# ✅ Status: Explanation Completed  
+Code should be added in a separate `.java` file inside this folder.
 
