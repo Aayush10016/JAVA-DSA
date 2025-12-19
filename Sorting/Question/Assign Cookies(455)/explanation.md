@@ -80,34 +80,6 @@ This is a classic **Greedy Matching Strategy**:
 Total → **O(n log n)**
 
 ---
-
-# 💻 Java Solution (Greedy Approach)
-
-```java
-class Solution {
-    public int findContentChildren(int[] g, int[] s) {
-        Arrays.sort(g); 
-        Arrays.sort(s);
-
-        int i = 0; // pointer for children
-        int j = 0; // pointer for cookies
-        int satisfied = 0;
-
-        while (i < g.length && j < s.length) {
-            if (s[j] >= g[i]) {
-                satisfied++;
-                i++;
-                j++;
-            } else {
-                j++; // cookie too small → try next one
-            }
-        }
-
-        return satisfied;
-    }
-}
-```
-
 ---
 
 # 🚀 Why This Works
@@ -135,9 +107,11 @@ Trying to match large cookies first fails, because:
 - No child can be satisfied  
 - Equal length arrays  
 - Large arrays (sorting still works efficiently)
+  
 
 ---
-
+# ✅ Status: Explanation Completed  
+Code should be added in a separate `.java` file inside this folder.
 
 
 # ✅ Status: Completed
