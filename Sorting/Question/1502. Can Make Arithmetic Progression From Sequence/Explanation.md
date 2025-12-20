@@ -159,8 +159,6 @@ Difference = 0 → valid AP.
 Still valid — AP works with negative values.
 
 ---
-
-
-
-Code should is in a separate `.java` file inside this folder.
+# CODE
+Code is added in a separate `.java` file inside this folder.
 
