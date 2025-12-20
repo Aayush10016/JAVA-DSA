@@ -88,7 +88,6 @@ Heights range from `1 to 100`, very small range → counting sort becomes **O(n)
 - Array length = 1 → answer = 0  
 
 ---
-
-# ✅ Status: Explanation Completed  
-Code should be added in a separate `.java` file inside this folder.
+#CODE
+Code is added in a separate `.java` file inside this folder.
 
