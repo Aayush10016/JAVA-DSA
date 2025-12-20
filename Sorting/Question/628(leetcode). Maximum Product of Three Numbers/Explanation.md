@@ -164,8 +164,6 @@ Negatives are the **entire trick** of this problem.
 - Large array → sorting or one-pass both safe
 
 ---
-
-
-
-solution code separately in a `.java` file.
+# CODE
+code is added separately in a `.java` file.
 
