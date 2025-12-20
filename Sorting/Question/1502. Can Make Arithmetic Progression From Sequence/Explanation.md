@@ -161,6 +161,6 @@ Still valid — AP works with negative values.
 ---
 
 
-# ✅ Status: Explanation Completed  
-Code should be added in a separate `.java` file inside this folder.
+
+Code should is in a separate `.java` file inside this folder.
 
