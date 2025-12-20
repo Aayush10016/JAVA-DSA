@@ -110,8 +110,8 @@ Trying to match large cookies first fails, because:
   
 
 ---
-
-Code should is added in a separate `.java` file inside this folder.
+# CODE
+Code is added in a separate `.java` file inside this folder.
 
 
 
