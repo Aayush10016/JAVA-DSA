@@ -1,0 +1,203 @@
+# 📘 LeetCode 350 — Intersection of Two Arrays II  
+**Category:** Hashing / Frequency Counting  
+**Difficulty:** Easy  
+**Tags:** Array, HashMap, Sorting, Two Pointers
+
+---
+
+## 📝 Problem Summary
+
+You are given two integer arrays `nums1` and `nums2`.
+
+Return the **intersection**, but **with frequency**, meaning:
+
+A value that appears:
+- `k` times in nums1  
+- `m` times in nums2  
+
+…should appear `min(k, m)` times in the result.
+
+This is different from LeetCode 349, which asked for **unique** intersection.
+
+---
+
+## 🎯 What Is Being Asked?
+
+You must:
+1. Count how many times each element occurs in both arrays  
+2. For each number, include it in the result as many times as it appears in **both** arrays  
+3. Order does not matter  
+
+This is a classic **multiset intersection** problem.
+
+---
+
+# 🔍 Key Difference From Question 349
+
+| Problem | Intersection Type |
+|---------|--------------------|
+| **Q349** | Unique intersection only |
+| **Q350** | Duplicate-aware intersection (frequency matters) |
+
+👉 You **must** track how many times each element appears.
+
+---
+
+## 🧠 Key Insight (Most Important)
+
+The core idea is frequency matching:
+
+For every number:
+```
+result_count = min(count_in_nums1, count_in_nums2)
+```
+
+This means:
+- If a number appears 3 times in nums1 and 5 times in nums2 → output it 3 times  
+- If it appears once in nums1 and zero times in nums2 → output it zero times  
+
+This is why **frequency counting** is the best approach.
+
+---
+
+## ⭐ Pattern Recognition
+
+You should think of these patterns:
+
+| Pattern | Why it fits |
+|--------|-------------|
+| **HashMap frequency** | We need to count occurrences |
+| **Sorting + two pointers** | After sorting, frequency matching is easy |
+| **Counting sort** | Works if values are small / constrained |
+
+Whenever the problem says:
+- "include element multiple times"
+- "intersection with count"
+- "frequency-based intersection"
+
+👉 Think **HashMap** or **frequency array**.
+
+---
+
+## 🛠 Approaches (Conceptual Only — NO CODE)
+
+---
+
+# 🔹 Approach 1: HashMap Frequency Count (Most Recommended)
+
+### Steps:
+1. Build a frequency map for `nums1`  
+2. Iterate through `nums2`  
+3. For each element:
+   - If it exists in the map AND count > 0  
+     → add to result  
+     → decrease count  
+4. Convert result list into array  
+
+### Why this works:
+- Maps store exact counts  
+- Matching frequencies becomes simple  
+- Handles duplicates correctly  
+
+### Complexity:
+- Time → `O(n + m)`  
+- Space → `O(min(n, m))`  
+
+This is the cleanest and most interview-friendly approach.
+
+---
+
+# 🔹 Approach 2: Sorting + Two Pointers
+
+### Steps:
+1. Sort both arrays  
+2. Use two pointers `i` and `j`  
+3. If nums1[i] == nums2[j]  
+   → add to result, move both  
+4. If nums1[i] < nums2[j]  
+   → move i  
+5. Else  
+   → move j  
+
+### Why this works:
+Sorting groups duplicates together, making frequency matching easy.
+
+### Complexity:
+- Time → `O(n log n + m log m)`  
+- Space → `O(1)` (excluding result)  
+
+This is also acceptable in interviews.
+
+---
+
+# 🔹 Approach 3: Frequency Array (If Range Is Small)
+
+If values are within a small fixed range (like 0–1000):
+- Create a freq array for nums1  
+- For each element in nums2:
+  - Decrement freq if available  
+  - Add to result  
+
+### Complexity:
+- Time → `O(n + m + range)`  
+- Space → `O(range)`  
+
+Use this only if constraints allow.
+
+---
+
+## 🧩 Example Walkthrough
+
+### Input:
+```
+nums1 = [1,2,2,1]
+nums2 = [2,2]
+```
+
+### Thinking:
+- Count in nums1 → `{1:2, 2:2}`
+- Count in nums2 → `{2:2}`
+
+Match frequencies:
+
+Value | nums1 count | nums2 count | result
+------|--------------|--------------|---------
+2     | 2            | 2            | 2 appears twice
+
+### Output:
+```
+[2, 2]
+```
+
+---
+
+## 🚫 Common Mistakes / Pitfalls
+
+### ❌ Returning unique intersection  
+This belongs to Q349.
+
+### ❌ Trying nested loops (`O(n²)`)  
+Unacceptable for large inputs.
+
+### ❌ Not decreasing HashMap count  
+This causes too many duplicates.
+
+### ❌ Forgetting order doesn’t matter  
+Result can be in any order.
+
+---
+
+## 🧪 Edge Cases
+
+- No overlap → return empty  
+- All elements identical in both arrays  
+- Large duplicate blocks  
+- One array much bigger than the other  
+- Negative values (HashMap handles fine)  
+- Zero values  
+
+---
+
+## CODE 
+Code is added separately in a `.java` file inside this folder.
+
